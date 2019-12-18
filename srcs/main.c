@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/18 14:27:16 by tvideira         ###   ########.fr       */
+/*   Updated: 2019/12/18 14:58:39 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,9 @@
 #include <stdio.h>
 #include "map.h"
 #include "cub3d.h"
+#include "render.h"
 
-void	create_background(t_mlx *mlx)
-{
-	int				i;
-	unsigned int	color;
 
-	i = 0;
-	color = 255;
-	while (i < mlx->width * mlx->height / 2)
-	{
-		mlx->screen[i] = color;
-		i++;
-	}
-	while (i < mlx->width * mlx->height)
-	{
-		mlx->screen[i] = color << 16;
-		i++;
-	}
-}
 
 int		loop_hook(t_mlx *mlx)
 {
@@ -44,9 +28,10 @@ int		loop_hook(t_mlx *mlx)
 		save_first_frame(mlx, "sphere2.bmp");
 		exit(0);
 	}*/
-	printf("%d\n", i++);
 	create_background(mlx);
+
 	mlx_put_image_to_window(mlx->id, mlx->window, mlx->img, 0, 0);
+	printf("%d\n", i++);
 	return (0);
 }
 
