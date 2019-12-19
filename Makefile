@@ -2,12 +2,12 @@ CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
 NAME			= cub3D
 SRCS_DIR		= srcs
-SRCS_FILES		= main.c map.c utils.c
+SRCS_FILES		= main.c map.c render.c key.c
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS_DIR		= objs
 OBJS_FILES		= $(SRCS_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR)/, $(OBJS_FILES))
-HEADERS_FILES	= map.h
+HEADERS_FILES	= map.h cub3d.h player.h render.h
 HEADERS			= $(addprefix $(SRCS_DIR)/, $(HEADERS_FILES))
 LIBRAIRIES		= -lmlx -framework OpenGL -framework AppKit
 

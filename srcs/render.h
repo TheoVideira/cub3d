@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:58 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/18 16:04:34 by tvideira         ###   ########.fr       */
+/*   Updated: 2019/12/19 06:52:08 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ typedef struct	s_dda
 	double	plane_x;
 	double	plane_y;
 	double	camera_x;
+	double	distance;
+	double	wall_x;
 }				t_dda;
 
-void	create_background(t_mlx *mlx);
+void			create_background(t_mlx *mlx);
+void			render_wall(t_mlx *mlx, t_map *map);
 
 #endif

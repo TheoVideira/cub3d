@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/18 14:58:39 by tvideira         ###   ########.fr       */
+/*   Updated: 2019/12/19 11:06:35 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "render.h"
 
 
-
 int		loop_hook(t_mlx *mlx)
 {
 	static int i = 0;
@@ -29,7 +28,7 @@ int		loop_hook(t_mlx *mlx)
 		exit(0);
 	}*/
 	create_background(mlx);
-
+	render_wall(mlx, mlx->map);
 	mlx_put_image_to_window(mlx->id, mlx->window, mlx->img, 0, 0);
 	printf("%d\n", i++);
 	return (0);
@@ -50,10 +49,11 @@ int		init_screen(t_mlx *mlx)
 
 int		main(int argc, char **argv)
 {
-	t_mlx	mlx;
-	t_map	map;
-	int		fd1;
-	int		fd2;
+	t_player	p;
+	t_mlx		mlx;
+	t_map		map;
+	int			fd1;
+	int			fd2;
 
 	if (argc != 2)
 		return (-1);
@@ -69,6 +69,13 @@ int		main(int argc, char **argv)
 		return (-1);
 	if (!(mlx.window = mlx_new_window(mlx.id, mlx.width, mlx.height, "cub3D")))
 		return (-1);
+	mlx.map = &map;
+	p.angle = 0;
+	p.pos_x = 1.5;
+	p.pos_y = 1.5;
+	mlx.player = &p;
+	mlx_hook(mlx.window, KeyPress, KeyPressMask, key_press, &mlx);
+    mlx_hook(mlx.window, KeyRelease, KeyReleaseMask, key_release, &mlx);
 	mlx_loop_hook(mlx.id, loop_hook, &mlx);
 	mlx_loop(mlx.id);
 	return (0);

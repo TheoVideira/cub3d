@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 06:45:53 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/18 06:46:44 by tvideira         ###   ########.fr       */
+/*   Updated: 2019/12/19 06:28:32 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_map
 
 }				t_map;
 
-void		read_map(int fd1, int fd2, t_map *map);
+void			read_map(int fd1, int fd2, t_map *map);
 void 			print_map(t_map *map);
 
 #endif
