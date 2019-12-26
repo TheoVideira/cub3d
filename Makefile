@@ -2,7 +2,7 @@ CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
 NAME			= cub3D
 SRCS_DIR		= srcs
-SRCS_FILES		= main.c map.c render.c key.c
+SRCS_FILES		= main.c map.c render.c key.c textures.c
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS_DIR		= objs
 OBJS_FILES		= $(SRCS_FILES:.c=.o)

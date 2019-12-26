@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/19 11:06:35 by tvideira         ###   ########.fr       */
+/*   Updated: 2019/12/26 11:07:28 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,12 @@ int		main(int argc, char **argv)
 	print_map(&map);
 	mlx.height = 480;
 	mlx.width = 640;
-	if (!(mlx.id = mlx_init()) || !init_screen(&mlx))
+	mlx.texture_size = 225;
+	mlx.text_file[0] = "textures/east.xpm";
+	mlx.text_file[1] = "textures/west.xpm";
+	mlx.text_file[2] = "textures/north.xpm";
+	mlx.text_file[3] = "textures/south.xpm";
+	if (!(mlx.id = mlx_init()) || !init_screen(&mlx) || !init_textures(&mlx))
 		return (-1);
 	if (!(mlx.window = mlx_new_window(mlx.id, mlx.width, mlx.height, "cub3D")))
 		return (-1);
