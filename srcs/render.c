@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:50 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/27 19:09:43 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/14 17:44:14 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,84 +43,21 @@ void	create_background(t_mlx *mlx)
 
 void	render_wall(t_mlx *mlx, t_map *map)
 {
-	t_dda		dda;
+	t_dda		d;
+	t_dda		*dda;
 	t_player	*p;
 	int			i;
-	char		c;
 
 	p = mlx->player;
-	init_render(&dda, p);
+	init_render(&d, p);
+	dda = &d;
 	i = -1;
 	while(++i < mlx->width)
 	{
-		render_1(mlx, &dda, p, &i);
-		
-		render_2(&dda, p);
-		c = map->map[dda.ray_map_y * map->width + dda.ray_map_x];
-		while (c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
-		{
-			if (dda.side_dist_x < dda.side_dist_y)
-			{
-				dda.side_dist_x += dda.delta_dist_x;
-				dda.ray_map_x += dda.step_x;
-				dda.side = 0;
-			}
-			else
-			{
-				dda.side_dist_y += dda.delta_dist_y;
-				dda.ray_map_y += dda.step_y;
-				dda.side = 1;
-			}
-			c = map->map[dda.ray_map_y * map->width + dda.ray_map_x];
-		}
-		if (!dda.side)
-			dda.distance = ((double)dda.ray_map_x - p->pos_x + (double)((1 - dda.step_x) / 2)) / dda.ray_dir_x;
-		else
-			dda.distance = ((double)dda.ray_map_y - p->pos_y + (double)((1 - dda.step_y) / 2)) / dda.ray_dir_y;		
-		double line_heigth = floor(mlx->height / dda.distance * 0.66);
-		double draw_start = floor(-line_heigth / 2.0 + (double)(mlx->height) / 2.0);
-		//double draw_end = floor(line_heigth / 2.0 + (double)(mlx->height) / 2.0);
-
-		if (!dda.side)
-			dda.wall_x = (p->pos_y + dda.distance * (double)dda.ray_map_y);
-		else
-			dda.wall_x = (p->pos_x + dda.distance * (double)dda.ray_map_x);		
-
-		dda.wall_x -= floor(dda.wall_x); 
-
-		double tex_x = dda.wall_x * (double)mlx->texture_size;
-		if (!dda.side && dda.ray_dir_x < 0.0)
-			tex_x = (double)mlx->texture_size - tex_x - 1.0;
-		if (dda.side && dda.ray_dir_y > 0.0)
-			tex_x = (double)mlx->texture_size - tex_x - 1.0;
-		tex_x = floor(tex_x);
-	
-	// AJOUT TEXTURES
-	int t;
-	if (!dda.side)
-		if (dda.ray_dir_x < 0.0)
-			t = 0;
-		else
-			t = 1;
-	else
-		if (dda.ray_dir_y > 0.0)
-			t = 2;
-		else
-			t = 3;
-	//
-
-		double ratio = (double)mlx->texture_size / line_heigth; 
-
-		double y = (draw_start < 0.0) ? -draw_start : 0;
-
-		while (y < floor(line_heigth) && y + draw_start < (double)(mlx->height))
-		{
-			double tex_y = floor(y * ratio);
-			int index_t = tex_y * mlx->texture_size + tex_x;
-
-			int index = i + (draw_start + y) * mlx->width;
-			mlx->screen[index] = mlx->texture[t][index_t];
-			y += 1.0;
-		}
+		render_1(mlx, dda, p, &i);
+		render_2(dda, p);
+		render_3(dda, map);
+		render_4(mlx, dda, p);
+		render_5(mlx, dda, i);
 	}
 }

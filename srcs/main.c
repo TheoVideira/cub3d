@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/26 11:07:28 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/14 20:51:12 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int		main(int argc, char **argv)
 		return (-1);
 	read_map(fd1, fd2, &map);
 	print_map(&map);
-	mlx.height = 480;
-	mlx.width = 640;
-	mlx.texture_size = 225;
-	mlx.text_file[0] = "textures/east.xpm";
-	mlx.text_file[1] = "textures/west.xpm";
-	mlx.text_file[2] = "textures/north.xpm";
-	mlx.text_file[3] = "textures/south.xpm";
+	mlx.height = 1500;
+	mlx.width = 2000;
+	mlx.texture_size = 16;
+	mlx.text_file[3] = "textures/stone.xpm";
+	mlx.text_file[2] = "textures/gold_block.xpm";
+	mlx.text_file[1] = "textures/bee_nest_bottom.xpm";
+	mlx.text_file[0] = "textures/red_wool.xpm";
 	if (!(mlx.id = mlx_init()) || !init_screen(&mlx) || !init_textures(&mlx))
 		return (-1);
 	if (!(mlx.window = mlx_new_window(mlx.id, mlx.width, mlx.height, "cub3D")))
