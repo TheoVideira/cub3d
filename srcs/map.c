@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 06:40:16 by tvideira          #+#    #+#             */
-/*   Updated: 2019/12/19 11:18:17 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/15 13:43:50 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void 		print_map(t_map *map)
 {
 	for (int b = 0; b < map->heigth; b++){
 		for (int a = 0; a < map->width; a++){
-			write(1 , &(map->map[(map->heigth - b - 1) * map->width + map->width - a - 1]), 1);
+			//write(1 , &(map->map[(map->heigth - b - 1) * map->width + a]), 1);
+			write(1 , &(map->map[b * map->width + a]), 1);
 		 }
 		write(1, "\n", 1);
 	}

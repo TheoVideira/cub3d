@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:50 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/14 17:44:14 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/15 11:51:58 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	render_wall(t_mlx *mlx, t_map *map)
 
 	p = mlx->player;
 	init_render(&d, p);
+	movement(mlx);
 	dda = &d;
 	i = -1;
 	while(++i < mlx->width)

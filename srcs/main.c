@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/14 20:51:12 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/15 13:08:54 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int		init_screen(t_mlx *mlx)
 
 	mlx->img = mlx_new_image(mlx->id, mlx->width, mlx->height);
 	mlx->screen = (int *)mlx_get_data_addr(mlx->img, &bits_per_pixel, &size_line, &endian);
+	mlx->key_w = 0;
+	mlx->key_a = 0;
+	mlx->key_s = 0;
+	mlx->key_d = 0;
 	if (endian != 0 || bits_per_pixel != 32)
 		return (0);
 	return (1);
@@ -63,8 +67,8 @@ int		main(int argc, char **argv)
 		return (-1);
 	read_map(fd1, fd2, &map);
 	print_map(&map);
-	mlx.height = 1500;
-	mlx.width = 2000;
+	mlx.height = 480;
+	mlx.width = 680;
 	mlx.texture_size = 16;
 	mlx.text_file[3] = "textures/stone.xpm";
 	mlx.text_file[2] = "textures/gold_block.xpm";
