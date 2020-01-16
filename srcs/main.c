@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/16 14:38:31 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/16 18:19:46 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		main(int argc, char **argv)
 		return (-1);
 	read_map(fd1, fd2, &map);
 	print_map(&map);
+	printf("is valid = %d\n", 	check_map(&map));
 	mlx.height = 480;
 	mlx.width = 680;
 	mlx.texture_size = 16;
