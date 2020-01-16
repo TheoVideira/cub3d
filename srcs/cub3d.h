@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 08:46:43 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/15 11:52:12 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/16 14:37:43 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct	s_mlx
 	int			key_w;
 	int			key_a;
 	int			key_s;
-	int			key_d;	
+	int			key_d;
+	double		move_speed;
+	double		rotate_speed;
 }				t_mlx;
 
 int     key_press(int key, t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/15 13:08:54 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/16 14:38:31 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int		init_screen(t_mlx *mlx)
 	mlx->key_a = 0;
 	mlx->key_s = 0;
 	mlx->key_d = 0;
+	mlx->move_speed = 0.06;
+    mlx->rotate_speed = M_PI / 36.0;
 	if (endian != 0 || bits_per_pixel != 32)
 		return (0);
 	return (1);
