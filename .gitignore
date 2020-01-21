@@ -1,2 +1,6 @@
 maps/
 cub3D
+.vscode/
+.DS_Store
+objs/
+parser.out

@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 06:45:53 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/16 18:11:41 by tvideira         ###   ########.fr       */
+/*   Created: 2020/01/17 11:20:00 by tvideira          #+#    #+#             */
+/*   Updated: 2020/01/17 13:42:14 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "error.h"
 
-typedef struct	s_map
+static int	ft_strlen(char *s)
 {
-	int		width;
-	int		heigth;
-	char	*map;
+	int i;
+	i = 0;
+	while(s[i])
+		i++;
+	return (i);
+}
 
-}				t_map;
+void		ft_error(char *error)
+{
+	write(2, error, ft_strlen(error));
+	exit(-1);
+}
 
-void			read_map(int fd1, int fd2, t_map *map);
-void 			print_map(t_map *map);
-int		 		check_map(t_map *map);
+void		ft_error_no(int err)
+{
+	char *error;
 
-#endif
+	error = strerror(err);
+	write(2, error, ft_strlen(error));
+	write(2, "\n", 1);
+	exit(-1);
+}

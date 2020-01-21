@@ -6,19 +6,26 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 06:40:16 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/16 18:39:56 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/01/17 11:20:18 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "map.h"
+#include <errno.h>
 #include <stdio.h>
 
 static int	is_valid_case(char c)
 {
 	return ((c >= '0' && c <= '2')
 			|| c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+static void	map_error(char *error, int len)
+{
+	write(2, error, len);
+	exit(-1);
 }
 
 static void	size_map(int fd, t_map *map)
@@ -31,12 +38,14 @@ static void	size_map(int fd, t_map *map)
 	{
 		if (is_valid_case(buffer))
 			i++;
-		if (buffer == '\n')
+		else if (buffer == '\n')
 		{
 			if (!map->width)
 				map->width = i;
 			map->heigth++;
 		}
+		else if (buffer != ' ')
+			map_error("Invalid char on map\n", 20);
 	}
 }
 
@@ -55,6 +64,12 @@ void		read_map(int fd1, int fd2, t_map *map)
 	i = 0;
 	while (read(fd2, &buffer, 1))
 	{
+		if (buffer == '\n')
+		{
+			x = i % map->width;
+			if (x || i / map->width > map->heigth)
+				map_error("Not a rectangular map\n", 22);			
+		}
 		if (is_valid_case(buffer))
 		{
 			x = i % map->width;
@@ -66,36 +81,48 @@ void		read_map(int fd1, int fd2, t_map *map)
 	map->map[i] = '\0';
 }
 
-int		 	check_map(t_map *map)
+int			check_map(t_map *map)
 {
 	int x;
 	int y;
+	int c;
 	int p;
+	int pos_player;
 
 	p = -1;
+	pos_player = 0;
 	while (++p < map->heigth * map->width)
 	{
 		x = p % map->width;
 		y = p / map->width;
-		if ((!y || y == map->heigth) && map->map[x + y * map->width] != '1')
+		c = x + y * map->width;
+		if ((!y || y == map->heigth - 1) && map->map[c] != '1')
+			map_error("Invalid map, not closed\n", 24);
+		if ((!x || x == map->width - 1) && map->map[c] != '1')
+			map_error("Invalid map, not closed\n", 24);
+		if (map->map[c] == 'N' || map->map[c] == 'S' || map->map[c] == 'W' ||
+			map->map[c] == 'E')
 		{
-			printf("1 x = %d, y = %d, p = %d\n", x, y, p);
-			return (0);
-		}
-		if ((!x || x == map->width) && map->map[x + y * map->width] != '1')
-		{
-			printf("2 x = %d, y = %d, p = %d\n", x, y, p);
-			return (0);
+			map->play_dir = map->map[c];
+			pos_player++;
 		}
 	}
+	if (pos_player != 1)
+		map_error("player position invalid\n", 24);
 	return (1);
 }
 
-void 		print_map(t_map *map)
+void		print_map(t_map *map)
 {
-	for (int b = 0; b < map->heigth; b++){
-		for (int a = 0; a < map->width; a++)
-			write(1 , &(map->map[(map->heigth - b - 1) * map->width + a]), 1);
+	int a;
+	int b;
+
+	b = -1;
+	while (++b < map->heigth)
+	{
+		a = -1;
+		while (++a < map->width)
+			write(1, &(map->map[(map->heigth - b - 1) * map->width + a]), 1);
 		write(1, "\n", 1);
 	}
 }
