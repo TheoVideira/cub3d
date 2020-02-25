@@ -1,0 +1,9 @@
+PARSE WRONG WHEN
+Line doesn't start by an identifier or map
+Parse twice the same parameter
+MAP not at the end
+Empty line in map description
+
+Find if this is identifier
+if yes
+do the good fucntion

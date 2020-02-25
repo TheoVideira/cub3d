@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_2.c                                          :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 14:42:57 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/21 15:33:47 by tvideira         ###   ########.fr       */
+/*   Created: 2019/10/08 15:41:02 by tvideira          #+#    #+#             */
+/*   Updated: 2019/10/15 18:45:52 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
@@ -29,46 +29,4 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		i += 1;
 	}
 	return (dst);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t size;
-
-	size = 0;
-	while (*(s + size))
-		size++;
-	return (size);
-}
-
-char	*ft_strrchr(const char *s, int c)
-{
-	int i;
-	int last_occurence;
-
-	i = 0;
-	last_occurence = -1;
-	while ((*(s + i)))
-	{
-		if (*(s + i) == c)
-			last_occurence = i;
-		i += 1;
-	}
-	if (last_occurence > -1)
-		return ((char *)(s + last_occurence));
-	if (c == '\0')
-		return ((char *)(s + i));
-	return (NULL);
-}
-
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t i;
-
-	i = 0;
-	if (!n)
-		return (0);
-	while (i + 1 < n && !ft_memcmp(s1 + i, s2 + i, 1) && *(s1 + i))
-		i += 1;
-	return (ft_memcmp(s1 + i, s2 + i, 1));
 }

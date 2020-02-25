@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 03:30:14 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/17 14:58:02 by tvideira         ###   ########.fr       */
+/*   Updated: 2019/10/30 15:55:26 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int			create_line(int fd, char **line, char **buffer)
 		i = find_next_line(*buffer);
 		if (i < BUFFER_SIZE && buffer[0][i])
 			return (r);
-		if (!(*line = strjoin(*line, *buffer)))
+		if (!(*line = gnl_strjoin(*line, *buffer)))
 			return (ft_error(line, NULL));
-		ft_bzero(*buffer, BUFFER_SIZE + 1);
+		gnl_bzero(*buffer, BUFFER_SIZE + 1);
 	}
 	if (!r)
 	{
-		*line = strjoin(*line, *buffer);
-		return ((!*line[0]) ? 0 : 1);
+		*line = gnl_strjoin(*line, *buffer);
+		return (0);
 	}
 	return (ft_error(line, NULL));
 }
@@ -52,18 +52,18 @@ int			finish_line(char *buffer, char **line, char **remaining, int r)
 	int		i;
 
 	i = find_next_line(buffer);
-	if (!(sub_to_print = substr(buffer, 0, i)))
+	if (!(sub_to_print = gnl_substr(buffer, 0, i)))
 		return (ft_error(line, &buffer));
-	if (!(*line = strjoin(*line, sub_to_print)))
+	if (!(*line = gnl_strjoin(*line, sub_to_print)))
 	{
 		free(sub_to_print);
 		return (ft_error(line, &buffer));
 	}
 	free(sub_to_print);
 	if (buffer[i])
-		if (!(*remaining = substr(buffer, i + 1, BUFFER_SIZE - i - 1)))
+		if (!(*remaining = gnl_substr(buffer, i + 1, BUFFER_SIZE - i - 1)))
 			return (ft_error(line, &buffer));
-	i = (r > 0) ? 1 : 0;
+	i = (buffer[i] || r == BUFFER_SIZE) ? 1 : 0;
 	free(buffer);
 	return (i);
 }
@@ -86,7 +86,7 @@ int			get_next_line(int fd, char **line)
 	remaining[fd] = NULL;
 	if (!(buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1)))
 		return (-1);
-	ft_bzero(buffer, BUFFER_SIZE + 1);
+	gnl_bzero(buffer, BUFFER_SIZE + 1);
 	if ((r = create_line(fd, line, &buffer)) < 1)
 	{
 		free(buffer);

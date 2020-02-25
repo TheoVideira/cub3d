@@ -1,41 +1,54 @@
 CC				= gcc
-CFLAGS			= -Wall -Wextra -Werror -I$(HEADERS_DIR)
+
+CFLAGS			= -Wall -Wextra -Werror $(INCLUDES)
+MLX_FLAGS		= -lmlx -framework OpenGL -framework AppKit
+LIBRARIES		= libft/libft.a gnl/gnl.a
+INCLUDES_FOLDER	= gnl includes libft
+INCLUDES		= $(addprefix -I, $(INCLUDES_FOLDER))
+
 NAME			= cub3D
+
 SRCS_DIR		= srcs
-SRCS_FILES		= main.c map.c render.c key.c textures.c dda.c utils_1.c utils_2.c
+SRCS_FILES		= main.c map.c render.c key.c textures.c dda.c # utils_1.c utils_2.c
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
+
 OBJS_DIR		= objs
 OBJS_FILES		= $(SRCS_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR)/, $(OBJS_FILES))
-HEADERS_DIR		= includes
+
 HEADERS_FILES	= map.h cub3d.h player.h render.h get_next_line.h
-HEADERS			= $(addprefix $(HEADERS_DIR)/, $(HEADERS_FILES))
-LIBRAIRIES		= -lmlx -framework OpenGL -framework AppKit
-SRCS_PARSE		= $(SRCS_DIR)/error.c $(SRCS_DIR)/get_next_line.c $(SRCS_DIR)/get_next_line_utils.c $(SRCS_DIR)/utils_1.c $(SRCS_DIR)/utils_2.c $(SRCS_DIR)/utils_3.c $(SRCS_DIR)/parser_tex.c $(SRCS_DIR)/parser_tex_utils.c $(SRCS_DIR)/parser_rfc.c $(SRCS_DIR)/test_parser.c
 
 all: $(NAME)
 
-debug:
-	$(CC) $(CFLAGS) -g3 -fsanitize=address $(LIBRAIRIES) $(OBJS) -o $(NAME)	
+$(NAME): $(OBJS)
+	$(MAKE) -C libft
+	$(MAKE) -C gnl
+	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBRARIES) -o $(NAME)
 
+debug:
+	$(CC) $(CFLAGS) -g3 -fsanitize=address $(MLX_FLAGS) $(OBJS) -o $(NAME)	
+
+#Create .o folder
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
+#Compile .o
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS) | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(LIBRAIRIES) $(OBJS) -o $(NAME)
-
 clean:
+	$(MAKE) -C libft clean
+	$(MAKE) -C gnl clean
 	rm -rf $(OBJS)
 	rm -rf $(OBJS_DIR)
 
 fclean: clean
+	$(MAKE) -C libft fclean
+	$(MAKE) -C gnl fclean
 	rm -f $(NAME)
 
 testparser:
-	$(CC) -I$(HEADERS_DIR) $(SRCS_PARSE) -o parser.out
+	$(CC) $(CFLAGS) $(INCLUDES) $(LIBRARIES) srcs/parser*.c
 
 re: fclean all
 

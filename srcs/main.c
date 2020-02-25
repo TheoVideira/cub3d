@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/21 15:08:40 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/02/25 16:19:37 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		main(int argc, char **argv)
 		return (-1);
 	read_map(fd1, fd2, &map);
 	print_map(&map);
-	printf("is valid = %d\n", check_map(&map));
 	mlx.height = 480;
 	mlx.width = 680;
 	mlx.text_file[3] = "textures/stone.xpm";

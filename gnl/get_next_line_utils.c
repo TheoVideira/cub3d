@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 03:41:44 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/17 13:46:00 by tvideira         ###   ########.fr       */
+/*   Updated: 2019/10/28 17:45:07 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_bzero(void *p, size_t n)
+void	gnl_bzero(void *p, size_t n)
 {
 	size_t	i;
 	char	*r;
@@ -33,7 +33,7 @@ int		find_next_line(const char *s)
 	return (size);
 }
 
-char	*substr(char *s, unsigned int start, size_t len)
+char	*gnl_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*sub;
@@ -51,7 +51,7 @@ char	*substr(char *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-char	*strjoin(char *s1, char *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
