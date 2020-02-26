@@ -35,6 +35,10 @@ void parse_south(char *line, t_parse_info *pi, t_game_info *gi);
 void parse_east(char *line, t_parse_info *pi, t_game_info *gi);
 void parse_west(char *line, t_parse_info *pi, t_game_info *gi);
 void parse_sprite(char *line, t_parse_info *pi, t_game_info *gi);
+void parse_res(char *line, t_parse_info *pi, t_game_info *gi);
+void parse_f_color(char *line, t_parse_info *pi, t_game_info *gi);
+void parse_c_color(char *line, t_parse_info *pi, t_game_info *gi);
+
 
 
 #endif

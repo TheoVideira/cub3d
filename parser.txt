@@ -7,3 +7,10 @@ Empty line in map description
 Find if this is identifier
 if yes
 do the good fucntion
+
+INIT res value and color value to -1 (missing values)
+ERROR CODE
+-1 (missing value)
+-2 (invalid value)
+-3 (invalid separator)
+-4 (bad ended)

@@ -16,16 +16,16 @@ int		is_identifier(char *str)
 {
 	if (!str[0])
 		return (0);
-	if (!str[1] || str[1] == ' ' || str[1] == '\t')
+	if (!str[1] || ft_isspace(str[1]))
 		if (str[0] == 'R' || str[0] == 'S' || str[0] == 'F' || str[0] == 'C')
 			return (1);
-	if (str[0] == 'N' && str[1] == 'O')
+	if (str[0] == 'N' && str[1] == 'O' && (!str[2] || ft_isspace(str[2])))
 		return (1);
-	if (str[0] == 'S' && str[1] == 'O')
+	if (str[0] == 'S' && str[1] == 'O' && (!str[2] || ft_isspace(str[2])))
 		return (1);
-	if (str[0] == 'E' && str[1] == 'A')
+	if (str[0] == 'E' && str[1] == 'A' && (!str[2] || ft_isspace(str[2])))
 		return (1);
-	if (str[0] == 'W' && str[1] == 'E')
+	if (str[0] == 'W' && str[1] == 'E' && (!str[2] || ft_isspace(str[2])))
 		return (1);
 	return (0);
 }
@@ -35,13 +35,13 @@ void	parse_line(char *str, t_parse_info *pi, t_game_info *gi)
 	if (!str[1] || str[1] == ' ' || str[1] == '\t')
 	{
 		if (str[0] == 'R')
-			return ;
+			parse_res(str, pi, gi);
 		if (str[0] == 'S')
 			parse_sprite(str, pi, gi);
 		if (str[0] == 'F')
-			return ;
+			parse_f_color(str, pi, gi);
 		if (str[0] == 'C')
-			return ;
+			parse_c_color(str, pi, gi);
 	}
 	if (str[0] == 'N' && str[1] == 'O')
 		parse_north(str, pi, gi);
@@ -58,17 +58,19 @@ int		parse_cub(char *filename, t_game_info *gi)
 	t_parse_info	pi;
 	int				fd = open(filename, O_RDONLY);
 	char			*line;
+	int				gnl;
 
-	while (get_next_line(fd, &line) > 0)
+	while ((gnl = get_next_line(fd, &line)) > -1)
 	{
 		printf("%s\n", line);
-		if (!*line)
+		if (!*line && gnl)
 			continue;
 		if (is_identifier(line))
 			parse_line(line, &pi, gi);
 		free(line);
+		if (!gnl)
+			break;
 	}
-	free(line);
 	return (0);
 }
 
@@ -76,6 +78,8 @@ int		main(int ac, char **av)
 {
 	t_game_info gi;
 
+	gi.resolution[0] = -1;
+	gi.resolution[1] = -1;
 	if (ac != 2)
 		return (-1);
 	parse_cub(av[1], &gi);
