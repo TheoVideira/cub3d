@@ -12,17 +12,19 @@
 
 #include "error.h"
 
-static int	ft_strlen(char *s)
-{
-	int i;
-	i = 0;
-	while(s[i])
-		i++;
-	return (i);
-}
-
 void		ft_error(char *error)
 {
+	write(2, "Error\n", 6);
+	write(2, error, ft_strlen(error));
+	exit(-1);
+}
+
+void		ft_error_line(char *error, int n)
+{
+	write(2, "Error\n", 6);
+	write(2, "Line ", 5);
+	ft_putnbr_fd(n, 2);
+	write(2, ": ", 2);
 	write(2, error, ft_strlen(error));
 	exit(-1);
 }

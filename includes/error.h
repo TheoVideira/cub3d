@@ -16,8 +16,11 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "libft.h"
 
 void	ft_error(char *error);
 void	ft_error_no(int err);
+void	ft_error_line(char *error, int n);
+
 
 #endif

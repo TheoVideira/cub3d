@@ -53,36 +53,49 @@ void	parse_line(char *str, t_parse_info *pi, t_game_info *gi)
 		parse_west(str, pi, gi);
 }
 
-int		parse_cub(char *filename, t_game_info *gi)
+void get_info(char *filename, t_parse_info *pi, t_game_info *gi)
 {
-	t_parse_info	pi;
-	int				fd = open(filename, O_RDONLY);
-	char			*line;
-	int				gnl;
+	int fd;
+	int gnl;
+	char *line;
 
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		ft_error_no(errno);
 	while ((gnl = get_next_line(fd, &line)) > -1)
 	{
-		printf("%s\n", line);
-		if (!*line && gnl)
-			continue;
 		if (is_identifier(line))
-			parse_line(line, &pi, gi);
+			parse_line(line, pi, gi);
 		free(line);
 		if (!gnl)
 			break;
 	}
+}
+
+int		parse_cub(char *filename, t_parse_info *pi, t_game_info *gi)
+{
+	check_cub_file(filename);
+	check_lines(filename);
+	get_info(filename, pi, gi);
 	return (0);
 }
 
 int		main(int ac, char **av)
 {
-	t_game_info gi;
+	t_game_info		gi;
+	t_parse_info	pi;
 
 	gi.resolution[0] = -1;
 	gi.resolution[1] = -1;
+	gi.f_color[0] = -1;
+	gi.f_color[1] = -1;
+	gi.f_color[2] = -1;
+	gi.c_color[0] = -1;
+	gi.c_color[1] = -1;
+	gi.c_color[2] = -1;
 	if (ac != 2)
 		return (-1);
-	parse_cub(av[1], &gi);
+	parse_cub(av[1], &pi, &gi);
 	printf("resolution = %d, %d\n", gi.resolution[0], gi.resolution[1]);
 	printf("ceil = r[%d], g[%d], b[%d]\n", gi.c_color[0], gi.c_color[1], gi.c_color[2]);
 	printf("floor = r[%d], g[%d], b[%d]\n", gi.f_color[0], gi.f_color[1], gi.f_color[2]);

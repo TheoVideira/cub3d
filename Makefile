@@ -48,7 +48,7 @@ fclean: clean
 	rm -f $(NAME)
 
 testparser:
-	$(CC) $(CFLAGS) srcs/parser*.c $(LIBRARIES)
+	$(CC) $(CFLAGS) srcs/parser*.c srcs/check.c srcs/error.c $(LIBRARIES)
 
 re: fclean all
 
