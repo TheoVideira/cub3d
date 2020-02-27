@@ -7,11 +7,11 @@ ERROR CODE
 
 1 check .cub file               Done
 2 check no weird line           Done
-3 check there is one map        Todo
-4 check map is last             Todo
+3 check there is one map        Done
+4 check map is last             Done
 5 gather everything beside map  Done
 6 check data collected is good  Todo
-7 check map                     Done
+7 check map                     Todo
 
 1
 - is a .cub file ?

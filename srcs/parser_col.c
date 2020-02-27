@@ -37,7 +37,7 @@ void		parse_f_color(char *line, t_parse_info *pi, t_game_info *gi)
 	int i;
 
 	i = 0;
-	pi->r++;
+	pi->f++;
 	line++;
 	while(ft_isspace(*line))
 		line++;
@@ -66,7 +66,7 @@ void		parse_c_color(char *line, t_parse_info *pi, t_game_info *gi)
 	int i;
 
 	i = 0;
-	pi->r++;
+	pi->c++;
 	line++;
 	while(ft_isspace(*line))
 		line++;

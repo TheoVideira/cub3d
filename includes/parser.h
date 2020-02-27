@@ -29,6 +29,7 @@ typedef struct	s_parse_info
 	int s;
 	int f;
 	int c;
+	int map;
 }				t_parse_info;
 
 void	parse_north(char *line, t_parse_info *pi, t_game_info *gi);
@@ -42,5 +43,9 @@ void    parse_c_color(char *line, t_parse_info *pi, t_game_info *gi);
 void    check_cub_file(char *filename);
 void    check_lines(char *filename);
 int     is_identifier(char *str);
+void	init_parse_info(t_parse_info *pi);
+void	check_map_1(char *filename, t_parse_info *pi);
+void	check_map(char *filename, t_parse_info *pi);
+void	check_map_2(char *filename);
 
 #endif

@@ -32,7 +32,7 @@ void			get_resolution(t_game_info *gi);
 void			get_ceil(t_game_info *gi);
 void			get_floor(t_game_info *gi);
 void			get_tex_no(t_game_info *gi);
-int				parser_tex(char *id, char **path, char *line);
-int				parser_format(char *format, char *s);
+void			init_game_info(t_game_info *gi);
+
 
 #endif

@@ -8,7 +8,11 @@ void check_cub_file(char *filename)
 	if (fd < 0)
 		ft_error_no(errno);
 	if (ft_strcmp(".cub", ft_strrchr(filename, '.')))
+	{
+		close(fd);
 		ft_error("File isn't a .cub file");
+	}
+	close(fd);
 }
 
 void check_lines(char *filename)
@@ -25,13 +29,26 @@ void check_lines(char *filename)
 	while ((gnl = get_next_line(fd, &line)) > -1)
 	{
 		n++;
-		if (*line && !is_identifier(line))
+		if (*line && (!is_identifier(line) && (*line != '0' && *line != '1')))
 		{
 			free(line);
+			close(fd);
 			ft_error_line("Not empty line that isn't recognized", n);			
 		}
 		free(line);
 		if (!gnl)
 			break;
 	}
+	close(fd);
+}
+
+void check_map(char *filename, t_parse_info *pi)
+{
+	check_map_1(filename, pi);
+	if (pi->map == 0)
+		ft_error("Map error : No map found");
+	if (pi->map != 1)
+		ft_error("Map error : There should be one map on the file\
+		\nHint : remove empty lines in its declaration.\n");
+	check_map_2(filename);
 }

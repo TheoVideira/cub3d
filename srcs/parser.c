@@ -70,12 +70,14 @@ void get_info(char *filename, t_parse_info *pi, t_game_info *gi)
 		if (!gnl)
 			break;
 	}
+	close(fd);
 }
 
 int		parse_cub(char *filename, t_parse_info *pi, t_game_info *gi)
 {
 	check_cub_file(filename);
 	check_lines(filename);
+	check_map(filename, pi);
 	get_info(filename, pi, gi);
 	return (0);
 }
@@ -85,14 +87,8 @@ int		main(int ac, char **av)
 	t_game_info		gi;
 	t_parse_info	pi;
 
-	gi.resolution[0] = -1;
-	gi.resolution[1] = -1;
-	gi.f_color[0] = -1;
-	gi.f_color[1] = -1;
-	gi.f_color[2] = -1;
-	gi.c_color[0] = -1;
-	gi.c_color[1] = -1;
-	gi.c_color[2] = -1;
+	init_game_info(&gi);
+	init_parse_info(&pi);
 	if (ac != 2)
 		return (-1);
 	parse_cub(av[1], &pi, &gi);
