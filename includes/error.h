@@ -17,10 +17,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
+# include "game_info.h"
 
 void	ft_error(char *error);
 void	ft_error_no(int err);
 void	ft_error_line(char *error, int n);
-
+void	ft_error_free(char *error, t_game_info *gi);
+void	ft_error_no_free(int err, t_game_info *gi);
 
 #endif

@@ -47,5 +47,15 @@ void	init_parse_info(t_parse_info *pi);
 void	check_map_1(char *filename, t_parse_info *pi);
 void	check_map(char *filename, t_parse_info *pi);
 void	check_map_2(char *filename);
+void	check_resolution(t_parse_info *pi, t_game_info *gi);
+void	check_f_color(t_parse_info *pi, t_game_info *gi);
+void    check_c_color(t_parse_info *pi, t_game_info *gi);
+void	check_no_tex(t_parse_info *pi, t_game_info *gi);
+void	check_so_tex(t_parse_info *pi, t_game_info *gi);
+void	check_ea_tex(t_parse_info *pi, t_game_info *gi);
+void	check_we_tex(t_parse_info *pi, t_game_info *gi);
+void	check_sp_tex(t_parse_info *pi, t_game_info *gi);
+void	check_info(t_parse_info *pi, t_game_info *gi);
+int     check_format(char *filename, char *format);
 
 #endif

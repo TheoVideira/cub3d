@@ -19,7 +19,20 @@ void		ft_error(char *error)
 	exit(-1);
 }
 
-void		ft_error_line(char *error, int n)
+void	ft_error_free(char *error, t_game_info *gi)
+{
+	write(2, "Error\n", 6);
+	write(2, error, ft_strlen(error));
+	free(gi->no_path);
+	free(gi->so_path);
+	free(gi->ea_path);
+	free(gi->we_path);
+	free(gi->sp_path);
+	exit(-1);
+}
+
+
+void	ft_error_line(char *error, int n)
 {
 	write(2, "Error\n", 6);
 	write(2, "Line ", 5);
@@ -29,12 +42,27 @@ void		ft_error_line(char *error, int n)
 	exit(-1);
 }
 
-void		ft_error_no(int err)
+void	ft_error_no(int err)
 {
 	char *error;
 
 	error = strerror(err);
 	write(2, error, ft_strlen(error));
 	write(2, "\n", 1);
+	exit(-1);
+}
+
+void	ft_error_no_free(int err, t_game_info *gi)
+{
+	char *error;
+
+	error = strerror(err);
+	write(2, error, ft_strlen(error));
+	write(2, "\n", 1);
+	free(gi->no_path);
+	free(gi->so_path);
+	free(gi->ea_path);
+	free(gi->we_path);
+	free(gi->sp_path);
 	exit(-1);
 }

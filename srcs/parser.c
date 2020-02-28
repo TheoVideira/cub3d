@@ -79,6 +79,7 @@ int		parse_cub(char *filename, t_parse_info *pi, t_game_info *gi)
 	check_lines(filename);
 	check_map(filename, pi);
 	get_info(filename, pi, gi);
+	check_info(pi, gi);
 	return (0);
 }
 

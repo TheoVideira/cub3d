@@ -7,10 +7,10 @@ void check_cub_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_error_no(errno);
-	if (ft_strcmp(".cub", ft_strrchr(filename, '.')))
+	if (check_format(filename, ".cub"))
 	{
 		close(fd);
-		ft_error("File isn't a .cub file");
+		ft_error("File isn't a .cub file\n");
 	}
 	close(fd);
 }
@@ -33,7 +33,7 @@ void check_lines(char *filename)
 		{
 			free(line);
 			close(fd);
-			ft_error_line("Not empty line that isn't recognized", n);			
+			ft_error_line("Not empty line that isn't recognized\n", n);			
 		}
 		free(line);
 		if (!gnl)
@@ -51,4 +51,17 @@ void check_map(char *filename, t_parse_info *pi)
 		ft_error("Map error : There should be one map on the file\
 		\nHint : remove empty lines in its declaration.\n");
 	check_map_2(filename);
+}
+
+void check_info(t_parse_info *pi, t_game_info *gi)
+{
+	check_resolution(pi, gi);
+	check_f_color(pi, gi);
+	check_c_color(pi, gi);
+	check_no_tex(pi, gi);
+	check_so_tex(pi, gi);
+	check_ea_tex(pi, gi);
+	check_we_tex(pi, gi);
+	check_sp_tex(pi, gi);
+	check_info(pi, gi);
 }
