@@ -26,6 +26,7 @@ typedef struct	s_game_info
 	char	*sp_path;
 	int		f_color[3];
 	int		c_color[3];
+	char	**map;
 }				t_game_info;
 
 void			get_resolution(t_game_info *gi);

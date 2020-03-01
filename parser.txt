@@ -10,7 +10,7 @@ ERROR CODE
 3 check there is one map        Done
 4 check map is last             Done
 5 gather everything beside map  Done
-6 check data collected is good  Todo
+6 check data collected is good  Done
 7 check map                     Todo
 
 1
@@ -52,7 +52,20 @@ BAD
 - Done
 
 6
-- TODO
+- Done
 
 7
-- TODO
+- Get map with gnl !
+- For each case : check if it is valid (0, 1, 2, N, S, E, W)
+- If case (0, 2, N, S, E, W) : check if there wall anywhere on its left, top, right, bottom
+- There should be only one N/S/E/W case on the map
+
+To get map
+
+split
+strlen splitted
+malloc
+copy
+free split
+repeat
+

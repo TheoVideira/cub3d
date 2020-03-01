@@ -19,12 +19,12 @@ void 		check_map_1(char *filename, t_parse_info *pi)
 		ft_error_no(errno);
 	while ((gnl = get_next_line(fd, &line)) > -1)
 	{
-		if ((*line == '0' || *line == '1') && !inmap)
+		if ((*line >= '0' && *line <= '2') && !inmap)
 		{
 			pi->map++;
 			inmap = 1;
 		}
-		if (!(*line == '0' || *line == '1'))
+		if (!(*line >= '0' && *line <= '2'))
 			inmap = 0;
 		free(line);
 		if (!gnl)

@@ -80,6 +80,7 @@ int		parse_cub(char *filename, t_parse_info *pi, t_game_info *gi)
 	check_map(filename, pi);
 	get_info(filename, pi, gi);
 	check_info(pi, gi);
+	parse_map(filename, gi);
 	return (0);
 }
 
@@ -87,6 +88,7 @@ int		main(int ac, char **av)
 {
 	t_game_info		gi;
 	t_parse_info	pi;
+	int i = 0;
 
 	init_game_info(&gi);
 	init_parse_info(&pi);
@@ -101,5 +103,8 @@ int		main(int ac, char **av)
 	printf("ea_path = %s\n", gi.ea_path);
 	printf("we_path = %s\n", gi.we_path);
 	printf("sp_path = %s\n", gi.sp_path);
+	printf("\nMap :\n");
+	while (gi.map[i])
+		printf("%s\n", gi.map[i++]);
 	return (0);
 }

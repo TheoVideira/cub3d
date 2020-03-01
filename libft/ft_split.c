@@ -45,7 +45,7 @@ static int	ft_slen_c(const char *s, char c)
 	return (i);
 }
 
-static char	**ft_emergency(char **s)
+char		**ft_emergency_split(char **s)
 {
 	int i;
 
@@ -74,7 +74,7 @@ char		**ft_split(char const *s, char c)
 			if (!in_word++)
 			{
 				if (!(strs[i] = (char *)ft_calloc(ft_slen_c(s - 1, c) + 1, 1)))
-					return (ft_emergency(strs));
+					return (ft_emergency_split(strs));
 				ft_memcpy(strs[i], s - 1, ft_slen_c(s - 1, c));
 				i += 1;
 			}

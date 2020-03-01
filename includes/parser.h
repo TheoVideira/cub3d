@@ -57,5 +57,10 @@ void	check_we_tex(t_parse_info *pi, t_game_info *gi);
 void	check_sp_tex(t_parse_info *pi, t_game_info *gi);
 void	check_info(t_parse_info *pi, t_game_info *gi);
 int     check_format(char *filename, char *format);
+void	get_map_heigth(char *filename, t_game_info *gi);
+void	parse_map(char *filename, t_game_info *gi);
+void	get_map(char *filename, t_game_info *gi);
+void	create_line_map(char *line, t_game_info *gi, int n);
+
 
 #endif

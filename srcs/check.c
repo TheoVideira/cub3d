@@ -29,7 +29,7 @@ void check_lines(char *filename)
 	while ((gnl = get_next_line(fd, &line)) > -1)
 	{
 		n++;
-		if (*line && (!is_identifier(line) && (*line != '0' && *line != '1')))
+		if (*line && (!is_identifier(line) && (*line < '0' || *line > '2')))
 		{
 			free(line);
 			close(fd);
@@ -63,5 +63,4 @@ void check_info(t_parse_info *pi, t_game_info *gi)
 	check_ea_tex(pi, gi);
 	check_we_tex(pi, gi);
 	check_sp_tex(pi, gi);
-	check_info(pi, gi);
 }
