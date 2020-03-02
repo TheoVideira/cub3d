@@ -9,7 +9,7 @@ INCLUDES		= $(addprefix -I, $(INCLUDES_FOLDER))
 NAME			= cub3D
 
 SRCS_DIR		= srcs
-SRCS_FILES		= main.c map.c render.c key.c textures.c dda.c # utils_1.c utils_2.c
+SRCS_FILES		= main.c map.c render.c key.c textures.c dda.c
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 OBJS_DIR		= objs

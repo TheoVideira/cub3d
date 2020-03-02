@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/02 14:36:21 by tvideira          #+#    #+#             */
+/*   Updated: 2020/03/02 15:15:05 by tvideira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 void	get_map_heigth(char *filename, t_game_info *gi)
@@ -21,7 +33,6 @@ void	get_map_heigth(char *filename, t_game_info *gi)
 	}
 	if(!(gi->map = malloc(sizeof(char *) * heigth)))
 		ft_error_free("malloc error\n", gi);
-	printf("heigth %d\n", heigth);
 	while(--heigth >= 0)
 		gi->map[heigth] = NULL;
 	close(fd);
@@ -52,9 +63,37 @@ void	get_map(char *filename, t_game_info *gi)
 	close(fd);
 }
 
+void	valid_case_player_pos_check(t_game_info *gi)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while(gi->map[++i])
+	{
+		j = -1;
+		while(gi->map[i][++j])
+		{
+			if (!is_valid_case(gi->map[i][j]))
+			{
+				ft_emergency_split(gi->map);
+				ft_error_free("Map contains invalid value\n", gi);
+			}
+			if(is_pos_case(gi->map[i][j]))
+				init_player_values(gi->map[i][j], gi, i, j);
+		}
+	}
+	if (gi->player.angle == -1.0)
+	{
+		ft_emergency_split(gi->map);
+		ft_error_free("Map is missing player position\n", gi);
+	}
+}
+
 void	parse_map(char *filename, t_game_info *gi)
 {
 	get_map_heigth(filename, gi);
 	get_map(filename, gi);
+	valid_case_player_pos_check(gi);
 }
 

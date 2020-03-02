@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 16:22:39 by tvideira          #+#    #+#             */
-/*   Updated: 2020/02/25 19:06:13 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/02 15:10:55 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,8 @@ int		main(int ac, char **av)
 	printf("\nMap :\n");
 	while (gi.map[i])
 		printf("%s\n", gi.map[i++]);
+	printf("\nPlayer angle = %f\n", gi.player.angle);
+	printf("Player pos x = %f\n", gi.player.pos_x);
+	printf("Player pos y = %f\n", gi.player.pos_y);
 	return (0);
 }

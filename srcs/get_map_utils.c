@@ -1,4 +1,47 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/02 14:36:13 by tvideira          #+#    #+#             */
+/*   Updated: 2020/03/02 15:15:14 by tvideira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
+#include <math.h>
+
+int		is_valid_case(char c)
+{
+	return ((c >= '0' && c <= '2')
+			|| c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+int		is_pos_case(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+void	init_player_values(char c, t_game_info *gi, int x, int y)
+{
+	if (gi->player.angle != -1.0)
+	{
+		ft_emergency_split(gi->map);
+		ft_error_free("Map error : Player position should appear once\n", gi);
+	}
+	if (c == 'N')
+		gi->player.angle = M_PI / 2.0;
+	else if (c == 'S')
+		gi->player.angle = 3.0 * M_PI / 2.0;
+	else if (c == 'E')
+		gi->player.angle = 0.0;
+	else
+		gi->player.angle = M_PI;
+	gi->player.pos_x = (double)x;
+	gi->player.pos_y = (double)y;
+}
 
 void	create_line_map(char *line, t_game_info *gi, int n)
 {

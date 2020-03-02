@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/02 14:36:48 by tvideira          #+#    #+#             */
+/*   Updated: 2020/03/02 14:48:58 by tvideira         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "game_info.h"
 #include "parser.h"
 
@@ -29,4 +41,9 @@ void init_game_info(t_game_info *gi)
 	gi->ea_path = NULL;
 	gi->we_path = NULL;
 	gi->sp_path = NULL;
+	gi->player.angle = -1.0;
+	gi->player.pos_x = -1.0;
+	gi->player.pos_y = -1.0;
+	gi->player.dir_x = -1.0;
+	gi->player.dir_y = -1.0;
 }
