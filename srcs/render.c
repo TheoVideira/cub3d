@@ -6,13 +6,12 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:50 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/15 11:51:58 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:10:07 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "render.h"
 #include "player.h"
-#include <stdio.h>
 
 static void	init_render(t_dda *dda, t_player *p)
 {
@@ -41,7 +40,7 @@ void	create_background(t_mlx *mlx)
 	}
 }
 
-void	render_wall(t_mlx *mlx, t_map *map)
+void	render_wall(t_mlx *mlx, char **map)
 {
 	t_dda		d;
 	t_dda		*dda;

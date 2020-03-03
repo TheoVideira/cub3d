@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2020/02/25 16:19:37 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:43:11 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,30 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "map.h"
 #include "cub3d.h"
 #include "render.h"
+#include "game_info.h"
+#include "parser.h"
 
+static void	show_info(t_game_info *gi, t_mlx *mlx)
+{
+	int i;
+
+	i = 0;
+	printf("resolution = %d, %d\n", gi->resolution[0], gi->resolution[1]);
+	printf("ceil = r[%d], g[%d], b[%d]\n", gi->c_color[0], gi->c_color[1], gi->c_color[2]);
+	printf("floor = r[%d], g[%d], b[%d]\n", gi->f_color[0], gi->f_color[1], gi->f_color[2]);
+	printf("no_path = %s\n", mlx->text_file[0]);
+	printf("so_path = %s\n", mlx->text_file[1]);
+	printf("we_path = %s\n", mlx->text_file[3]);
+	printf("ea_path = %s\n", mlx->text_file[2]);
+	printf("\nMap mlx:\n");
+	while (mlx->map[i])
+		printf("%s\n", mlx->map[i++]);
+	printf("\nPlayer angle = %f\n", mlx->player->angle);
+	printf("Player pos x = %f\n", mlx->player->pos_x);
+	printf("Player pos y = %f\n", mlx->player->pos_y);
+}
 
 int		loop_hook(t_mlx *mlx)
 {
@@ -55,37 +75,30 @@ int		init_screen(t_mlx *mlx)
 
 int		main(int argc, char **argv)
 {
-	t_player	p;
 	t_mlx		mlx;
-	t_map		map;
-	int			fd1;
-	int			fd2;
+	t_game_info		gi;
+	t_parse_info	pi;
 
 	if (argc != 2)
 		return (-1);
-	fd1 = open(argv[1], O_RDONLY);
-	fd2 = open(argv[1], O_RDONLY);
-	if (fd1 == -1 || fd2 == -1)
-		return (-1);
-	read_map(fd1, fd2, &map);
-	print_map(&map);
-	mlx.height = 480;
-	mlx.width = 680;
-	mlx.text_file[3] = "textures/stone.xpm";
-	mlx.text_file[2] = "textures/gold_block.xpm";
-	mlx.text_file[1] = "textures/bee_nest_bottom.xpm";
-	mlx.text_file[0] = "textures/red_wool.xpm";
+	init_game_info(&gi);
+	init_parse_info(&pi);
+	parse_cub_file(argv[1], &pi, &gi);
+	mlx.text_file[0] = gi.no_path;
+	mlx.text_file[1] = gi.so_path;
+	mlx.text_file[2] = gi.ea_path;
+	mlx.text_file[3] = gi.we_path;
+	mlx.height = gi.resolution[1];
+	mlx.width = gi.resolution[0];
+	mlx.map = gi.map;
 	if (!(mlx.id = mlx_init()) || !init_screen(&mlx) || !init_textures(&mlx))
 		return (-1);
 	if (!(mlx.window = mlx_new_window(mlx.id, mlx.width, mlx.height, "cub3D")))
 		return (-1);
-	mlx.map = &map;
-	p.angle = 0;
-	p.pos_x = 1.5;
-	p.pos_y = 1.5;
-	mlx.player = &p;
-	mlx_hook(mlx.window, KeyPress, KeyPressMask, key_press, &mlx);
-    mlx_hook(mlx.window, KeyRelease, KeyReleaseMask, key_release, &mlx);
+	mlx.player = &(gi.player);
+	show_info(&gi, &mlx);
+	mlx_hook(mlx.window, KEYPRESS, 0, key_press, &mlx);
+    mlx_hook(mlx.window, KEYRELEASE, 0, key_release, &mlx);
 	mlx_loop_hook(mlx.id, loop_hook, &mlx);
 	mlx_loop(mlx.id);
 	return (0);

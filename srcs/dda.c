@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 18:25:02 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/17 10:55:22 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:44:02 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	render_2(t_dda *dda, t_player *p)
 	}
 }
 
-void	render_3(t_dda *dda, t_map *map)
+void	render_3(t_dda *dda, char **map)
 {
 	char c;
 
-	c = map->map[dda->ray_map_y * map->width + dda->ray_map_x];
-	while (c != '1' && c != 'N' && c != 'S' && c != 'E' && c != 'W')
+	c = map[dda->ray_map_x][dda->ray_map_y];
+	while (c != '1')
 	{
 		if (dda->side_dist_x < dda->side_dist_y)
 		{
@@ -72,7 +72,7 @@ void	render_3(t_dda *dda, t_map *map)
 			dda->ray_map_y += dda->step_y;
 			dda->side = 1;
 		}
-		c = map->map[dda->ray_map_y * map->width + dda->ray_map_x];
+		c = map[dda->ray_map_x][dda->ray_map_y];
 	}
 }
 

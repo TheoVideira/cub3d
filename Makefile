@@ -9,14 +9,13 @@ INCLUDES		= $(addprefix -I, $(INCLUDES_FOLDER))
 NAME			= cub3D
 
 SRCS_DIR		= srcs
-SRCS_FILES		= main.c map.c render.c key.c textures.c dda.c
+SRCS_FILES		= check.c check_texture.c dda.c first_check_map.c init_struct.c main.c parser_col.c parser_res.c render.c\
+				  check_info.c closed_map_utils.c error.c get_map_utils.c key.c parser.c parser_map.c parser_tex.c textures.c
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
 OBJS_DIR		= objs
 OBJS_FILES		= $(SRCS_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR)/, $(OBJS_FILES))
-
-HEADERS_FILES	= map.h cub3d.h player.h render.h get_next_line.h
 
 all: $(NAME)
 
@@ -26,7 +25,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBRARIES) -o $(NAME)
 
 debug:
-	$(CC) $(CFLAGS) -g3 -fsanitize=address $(MLX_FLAGS) $(OBJS) -o $(NAME)	
+	$(CC) $(CFLAGS) -g3 -fsanitize=address $(MLX_FLAGS) $(OBJS) $(LIBRARIES) -o $(NAME)
 
 #Create .o folder
 $(OBJS_DIR):
@@ -48,7 +47,7 @@ fclean: clean
 	rm -f $(NAME)
 
 testparser:
-	$(CC) $(CFLAGS) srcs/parser*.c srcs/*check*.c srcs/error.c srcs/init_struct.c srcs/get_map_utils.c $(LIBRARIES)
+	$(CC) $(CFLAGS) srcs/parser*.c srcs/*check*.c srcs/error.c srcs/init_struct.c srcs/get_map_utils.c srcs/closed_map_utils.c $(LIBRARIES)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 17:48:37 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/02 15:05:42 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:18:04 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ int		is_valid_case(char c);
 int		is_pos_case(char c);
 void	init_player_values(char c, t_game_info *gi, int x, int y);
 void	valid_case_player_pos_check(t_game_info *gi);
+int     check_top_bottom(t_game_info *gi, int x, int y);
+int     check_left_right(t_game_info *gi, int x, int y);
+int		parse_cub_file(char *filename, t_parse_info *pi, t_game_info *gi);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:58 by tvideira          #+#    #+#             */
-/*   Updated: 2020/01/14 18:05:59 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:13:21 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ typedef struct	s_dda
 }				t_dda;
 
 void			create_background(t_mlx *mlx);
-void			render_wall(t_mlx *mlx, t_map *map);
+void			render_wall(t_mlx *mlx, char **map);
 void			render_1(t_mlx *mlx, t_dda *dda, t_player *p, int *i);
 void			render_2(t_dda *dda, t_player *p);
-void			render_3(t_dda *dda, t_map *map);
+void			render_3(t_dda *dda, char **map);
 void			render_4(t_mlx *mlx, t_dda *dda, t_player *p);
 void			render_5(t_mlx *mlx, t_dda *dda, int i);
 #endif

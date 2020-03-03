@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 16:22:39 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/02 15:10:55 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:17:54 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void get_info(char *filename, t_parse_info *pi, t_game_info *gi)
 	close(fd);
 }
 
-int		parse_cub(char *filename, t_parse_info *pi, t_game_info *gi)
+int		parse_cub_file(char *filename, t_parse_info *pi, t_game_info *gi)
 {
 	check_cub_file(filename);
 	check_lines(filename);
@@ -84,6 +84,7 @@ int		parse_cub(char *filename, t_parse_info *pi, t_game_info *gi)
 	return (0);
 }
 
+/*
 int		main(int ac, char **av)
 {
 	t_game_info		gi;
@@ -111,3 +112,4 @@ int		main(int ac, char **av)
 	printf("Player pos y = %f\n", gi.player.pos_y);
 	return (0);
 }
+*/

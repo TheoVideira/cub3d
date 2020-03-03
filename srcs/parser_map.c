@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:36:21 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/02 15:15:05 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/02 18:07:49 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,31 @@ void	valid_case_player_pos_check(t_game_info *gi)
 	}
 }
 
+void	check_closed_map(t_game_info *gi)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while(gi->map[++i])
+	{
+		j = -1;
+		while(gi->map[i][++j])
+		{
+			if ((!check_left_right(gi, i, j)) || (!check_top_bottom(gi, i, j)))
+			{
+				ft_emergency_split(gi->map);
+				ft_error_free("Map isn't closed\n", gi);
+			}
+		}
+	}
+}
+
 void	parse_map(char *filename, t_game_info *gi)
 {
 	get_map_heigth(filename, gi);
 	get_map(filename, gi);
 	valid_case_player_pos_check(gi);
+	check_closed_map(gi);
 }
 

@@ -1,0 +1,10 @@
+L = Last, W = Whenever
+
+1 Redo rendering cause map format changed   DONE
+2 Redo texture init                         TODO
+3 Render sprite                             TODO
+4 Do events                                 TODO
+5 Exit properly                             TODO
+L Redo parser to new subject                TODO
+
+W Refactor Code                             TODO
