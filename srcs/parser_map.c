@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:36:21 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/02 18:07:49 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:11 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	valid_case_player_pos_check(t_game_info *gi)
 				ft_error_free("Map contains invalid value\n", gi);
 			}
 			if(is_pos_case(gi->map[i][j]))
-				init_player_values(gi->map[i][j], gi, i, j);
+				init_player_values(gi->map[i][j], gi, j, i);
 		}
 	}
 	if (gi->player.angle == -1.0)

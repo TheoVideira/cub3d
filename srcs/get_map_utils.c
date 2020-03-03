@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:36:13 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/02 15:15:14 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 23:03:01 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	init_player_values(char c, t_game_info *gi, int x, int y)
 		gi->player.angle = 0.0;
 	else
 		gi->player.angle = M_PI;
-	gi->player.pos_x = (double)x;
-	gi->player.pos_y = (double)y;
+	gi->player.pos_x = (double)x + 0.5;
+	gi->player.pos_y = (double)y + 0.5;
 }
 
 void	create_line_map(char *line, t_game_info *gi, int n)

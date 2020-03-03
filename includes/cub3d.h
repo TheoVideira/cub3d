@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 08:46:43 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/03 17:12:22 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:51:35 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,8 @@ typedef struct	s_mlx
 	int			key_a;
 	int			key_s;
 	int			key_d;
+	int			key_l;
+	int			key_r;
 	double		move_speed;
 	double		rotate_speed;
 }				t_mlx;
@@ -185,5 +187,6 @@ typedef struct	s_mlx
 int     key_press(int key, t_mlx *mlx);
 int     key_release(int key, t_mlx *mlx);
 int		init_textures(t_mlx *mlx);
+int		quit_window(t_mlx *mlx);
 void	movement(t_mlx *mlx);
 #endif

@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 05:08:51 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/03 17:43:11 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/03 23:02:11 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int		init_screen(t_mlx *mlx)
 	mlx->key_a = 0;
 	mlx->key_s = 0;
 	mlx->key_d = 0;
+	mlx->key_l = 0;
+	mlx->key_r = 0;
 	mlx->move_speed = 0.06;
     mlx->rotate_speed = M_PI / 36.0;
 	if (endian != 0 || bits_per_pixel != 32)
@@ -99,6 +101,7 @@ int		main(int argc, char **argv)
 	show_info(&gi, &mlx);
 	mlx_hook(mlx.window, KEYPRESS, 0, key_press, &mlx);
     mlx_hook(mlx.window, KEYRELEASE, 0, key_release, &mlx);
+    mlx_hook(mlx.window, DESTROYNOTIFY, 0, quit_window, &mlx);
 	mlx_loop_hook(mlx.id, loop_hook, &mlx);
 	mlx_loop(mlx.id);
 	return (0);
