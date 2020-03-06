@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 18:25:02 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/06 03:36:32 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/06 04:32:07 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,5 @@ void	render_5(t_cub *cub, t_texture *tex, t_dda *dda, int i)
 		cub->mlx.screen[index] = tex->data[dda->id_tex][index_t];
 		y += 1.0;
 	}
+	dda->wall_dist[i] = dda->distance;
 }

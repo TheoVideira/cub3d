@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:50 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/06 03:50:33 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/06 04:32:42 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	render_wall(t_cub *cub)
 
 	p = &(cub->gi.player);
 	init_render(&dda, p);
+	dda.wall_dist = malloc(sizeof(double) * cub->gi.resolution[0]);
 	movement_forward_backward(cub);
 	i = -1;
 	while(++i < cub->gi.resolution[0])
@@ -60,4 +61,6 @@ void	render_wall(t_cub *cub)
 		render_4(&(cub->gi.texture), &dda, p, cub->gi.resolution[1]);
 		render_5(cub, &(cub->gi.texture), &dda, i);
 	}
+	render_sprite(cub, &dda);
+	free(dda.wall_dist);
 }
