@@ -9,3 +9,8 @@ L Redo parser to new subject                TODO
 
 W Refactor Code                             TODO
 
+New structs : 
+movement and rotation speed should be defined
+new struct inputs containing inputs info
+new struct texture containing more value
+remove multiple occurence of the same variable in different struct when possible

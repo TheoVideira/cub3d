@@ -6,12 +6,12 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:50 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/03 22:30:56 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/06 03:50:33 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cub3d.h"
 #include "render.h"
-#include "player.h"
 
 static void	init_render(t_dda *dda, t_player *p)
 {
@@ -21,43 +21,43 @@ static void	init_render(t_dda *dda, t_player *p)
 	dda->plane_y = -p->dir_x;
 }
 
-void	create_background(t_mlx *mlx)
+void	create_background(t_cub *cub)
 {
-	int				i;
-	unsigned int	color;
+	int	i;
 
 	i = 0;
-	color = 255;
-	while (i < mlx->width * mlx->height / 2)
+	while (i < cub->gi.resolution[0] * cub->gi.resolution[1] / 2)
 	{
-		mlx->screen[i] = color;
+		cub->mlx.screen[i] = cub->gi.c_color[0] << 16;
+		cub->mlx.screen[i] += cub->gi.c_color[1] << 8;
+		cub->mlx.screen[i] += cub->gi.c_color[2];
 		i++;
 	}
-	while (i < mlx->width * mlx->height)
+	while (i < cub->gi.resolution[0] * cub->gi.resolution[1])
 	{
-		mlx->screen[i] = color << 16;
+		cub->mlx.screen[i] = cub->gi.f_color[0] << 16;
+		cub->mlx.screen[i] += cub->gi.f_color[1] << 8;
+		cub->mlx.screen[i] += cub->gi.f_color[2];
 		i++;
 	}
 }
 
-void	render_wall(t_mlx *mlx, char **map)
+void	render_wall(t_cub *cub)
 {
-	t_dda		d;
-	t_dda		*dda;
+	t_dda		dda;
 	t_player	*p;
 	int			i;
 
-	p = mlx->player;
-	init_render(&d, p);
-	movement(mlx);
-	dda = &d;
+	p = &(cub->gi.player);
+	init_render(&dda, p);
+	movement_forward_backward(cub);
 	i = -1;
-	while(++i < mlx->width)
+	while(++i < cub->gi.resolution[0])
 	{
-		render_1(mlx, dda, p, &i);
-		render_2(dda, p);
-		render_3(dda, map);
-		render_4(mlx, dda, p);
-		render_5(mlx, dda, i);
+		render_1(cub, &dda, p, i);
+		render_2(&dda, p);
+		render_3(&dda, cub->gi.map);
+		render_4(&(cub->gi.texture), &dda, p, cub->gi.resolution[1]);
+		render_5(cub, &(cub->gi.texture), &dda, i);
 	}
 }

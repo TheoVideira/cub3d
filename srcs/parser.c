@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 16:22:39 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/03 20:11:50 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/06 00:41:07 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,15 @@ int		main(int ac, char **av)
 	init_parse_info(&pi);
 	if (ac != 2)
 		return (-1);
-	parse_cub(av[1], &pi, &gi);
+	parse_cub_file(av[1], &pi, &gi);
 	printf("resolution = %d, %d\n", gi.resolution[0], gi.resolution[1]);
 	printf("ceil = r[%d], g[%d], b[%d]\n", gi.c_color[0], gi.c_color[1], gi.c_color[2]);
 	printf("floor = r[%d], g[%d], b[%d]\n", gi.f_color[0], gi.f_color[1], gi.f_color[2]);
-	printf("no_path = %s\n", gi.no_path);
-	printf("so_path = %s\n", gi.so_path);
-	printf("ea_path = %s\n", gi.ea_path);
-	printf("we_path = %s\n", gi.we_path);
-	printf("sp_path = %s\n", gi.sp_path);
+	printf("texture.path[0] = %s\n", gi.texture.path[0]);
+	printf("texture.path[1] = %s\n", gi.texture.path[1]);
+	printf("texture.path[2] = %s\n", gi.texture.path[2]);
+	printf("texture.path[3] = %s\n", gi.texture.path[3]);
+	printf("texture.path[4] = %s\n", gi.texture.path[4]);
 	printf("\nMap :\n");
 	while (gi.map[i])
 		printf("%s\n", gi.map[i++]);

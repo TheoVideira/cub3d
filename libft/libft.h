@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 16:40:40 by tvideira          #+#    #+#             */
-/*   Updated: 2020/02/25 14:50:23 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/05 20:58:30 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ t_list			*ft_lstmap
 int				ft_max(int n1, int n2);
 int				ft_strcmp(const char *s1, const char *s2);
 char			**ft_emergency_split(char **s);
+int				ft_min(int n1, int n2);
 
 #endif

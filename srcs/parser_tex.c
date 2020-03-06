@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_texture.c                                   :+:      :+:    :+:   */
+/*   parser_tex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 18:22:04 by tvideira          #+#    #+#             */
-/*   Updated: 2020/02/25 19:00:07 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/05 23:58:07 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void parse_north(char *line, t_parse_info *pi, t_game_info *gi)
     line += 2;
     while (ft_isspace(*line))
         line++;
-    gi->no_path = ft_strdup(line);
+    gi->texture.path[0] = ft_strdup(line);
 }
 
 void parse_south(char *line, t_parse_info *pi, t_game_info *gi)
@@ -27,7 +27,7 @@ void parse_south(char *line, t_parse_info *pi, t_game_info *gi)
     line += 2;
     while (ft_isspace(*line))
         line++;
-    gi->so_path = ft_strdup(line);
+    gi->texture.path[1] = ft_strdup(line);
 }
 
 void parse_east(char *line, t_parse_info *pi, t_game_info *gi)
@@ -36,7 +36,7 @@ void parse_east(char *line, t_parse_info *pi, t_game_info *gi)
     line += 2;
     while (ft_isspace(*line))
         line++;
-    gi->ea_path = ft_strdup(line);
+    gi->texture.path[2] = ft_strdup(line);
 }
 
 void parse_west(char *line, t_parse_info *pi, t_game_info *gi)
@@ -45,7 +45,7 @@ void parse_west(char *line, t_parse_info *pi, t_game_info *gi)
     line += 2;
     while (ft_isspace(*line))
         line++;
-    gi->we_path = ft_strdup(line);
+    gi->texture.path[3] = ft_strdup(line);
 }
 
 void parse_sprite(char *line, t_parse_info *pi, t_game_info *gi)
@@ -54,5 +54,5 @@ void parse_sprite(char *line, t_parse_info *pi, t_game_info *gi)
     line++;
     while (ft_isspace(*line))
         line++;
-    gi->sp_path = ft_strdup(line);
+    gi->texture.path[4] = ft_strdup(line);
 }

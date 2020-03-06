@@ -6,16 +6,14 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 08:46:43 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/03 22:51:35 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/06 03:48:28 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-# include <mlx.h>
-# include <math.h>
-# include "player.h"
-
+# define MOVE_SPEED 0.06
+# define ROTATE_SPEED 0.08
 # define KEYPRESS 2
 # define KEYRELEASE 3
 # define BUTTONPRESS 4
@@ -159,34 +157,46 @@
 # define GREEN_COMP 1
 # define BLUE_COMP 0
 # define ALPHA_COMP 3
-
+# include "game_info.h"
+# include "parser.h"
+# include <math.h>
+# include <mlx.h>
 
 typedef struct	s_mlx
 {
-	void		*id;
-	int			width;
-	int			height;
+	void		*ptr;
 	void		*window;
 	int			*screen;
 	int			*img;
-	t_player	*player;
-	char		**map;
-	int			texture_size;
-	char		*text_file[4];
-	int			*texture[4];
-	int			key_w;
-	int			key_a;
-	int			key_s;
-	int			key_d;
-	int			key_l;
-	int			key_r;
-	double		move_speed;
-	double		rotate_speed;
 }				t_mlx;
 
-int     key_press(int key, t_mlx *mlx);
-int     key_release(int key, t_mlx *mlx);
-int		init_textures(t_mlx *mlx);
-int		quit_window(t_mlx *mlx);
-void	movement(t_mlx *mlx);
+typedef struct	s_input
+{
+	int			key_forward;
+	int			key_backward;
+	int			key_left;
+	int			key_right;
+	int			key_rotate_left;
+	int			key_rotate_right;
+}				t_input;
+
+typedef struct	s_cub
+{
+	t_mlx			mlx;
+	t_game_info		gi;
+	t_input			input;
+	t_parse_info	pi;
+}				t_cub;
+
+void	init_cub(t_cub *cub);
+int		init_textures(t_cub *cub, int i);
+int		quit_window(t_cub *cub);
+void	init_input(t_input *input);
+int     key_press(int key, t_cub *cub);
+int     key_release(int key, t_cub *cub);
+void	movement_forward_backward(t_cub *cub);
+void	movement_left_right_rotate(t_cub *cub);
+void	render_wall(t_cub *cub);
+void	create_background(t_cub *cub);
+
 #endif

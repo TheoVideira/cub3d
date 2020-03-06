@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 14:35:58 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/03 17:13:21 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/06 03:48:20 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ typedef struct	s_dda
 	double	tex_y;
 	double	draw_start;
 	double	line_heigth;
+	int		id_tex;
 }				t_dda;
 
-void			create_background(t_mlx *mlx);
-void			render_wall(t_mlx *mlx, char **map);
-void			render_1(t_mlx *mlx, t_dda *dda, t_player *p, int *i);
+void			render_1(t_cub *cub, t_dda *dda, t_player *p, int i);
 void			render_2(t_dda *dda, t_player *p);
 void			render_3(t_dda *dda, char **map);
-void			render_4(t_mlx *mlx, t_dda *dda, t_player *p);
-void			render_5(t_mlx *mlx, t_dda *dda, int i);
+void			render_4(t_texture *tex,
+					t_dda *dda, t_player *p, double height);
+void			render_5(t_cub *cub, t_texture *tex, t_dda *dda, int i);
 #endif
