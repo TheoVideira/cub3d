@@ -2,6 +2,7 @@ CC				= gcc
 
 CFLAGS			= -Wall -Wextra -Werror $(INCLUDES)
 MLX_FLAGS		= -lmlx -framework OpenGL -framework AppKit
+MLX_WSL_FLAGS	= -L/usr/local/lib -lmlx -lm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp -lbsd
 LIBRARIES		= libft/libft.a gnl/gnl.a
 INCLUDES_FOLDER	= gnl includes libft
 INCLUDES		= $(addprefix -I, $(INCLUDES_FOLDER))
@@ -25,8 +26,17 @@ $(NAME): $(OBJS)
 	$(MAKE) -C gnl
 	$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJS) $(LIBRARIES) -o $(NAME)
 
+wsl: $(OBJS)
+	$(MAKE) -C libft
+	$(MAKE) -C gnl
+	$(CC) $(CFLAGS) $(OBJS) $(LIBRARIES) -o $(NAME) $(MLX_WSL_FLAGS)
+
+
 debug:
 	$(CC) $(CFLAGS) -g3 -fsanitize=address $(MLX_FLAGS) $(OBJS) $(LIBRARIES) -o $(NAME)
+
+debug_wsl:
+	$(CC) $(CFLAGS) -g3 -fsanitize=address $(OBJS) $(LIBRARIES) -o $(NAME) $(MLX_WSL_FLAGS)
 
 #Create .o folder
 $(OBJS_DIR):

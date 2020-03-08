@@ -28,8 +28,8 @@ void    render_sprite(t_cub *cub, t_dda *dda)
     int     Ystart, Yend, Xstart, Xend;
     int     indexa, indexb;
 
-    x = 15.0;
-    y = 10.0;
+    x = 11.0;
+    y = 9.5;
 
     pX = x - cub->gi.player.pos_x;
     pY = y - cub->gi.player.pos_y;
@@ -38,27 +38,30 @@ void    render_sprite(t_cub *cub, t_dda *dda)
     tmp = pX;
     pX = invDet * (cub->gi.player.dir_y * pX - cub->gi.player.dir_x * pY);
     pY = invDet * (-dda->plane_y * tmp + dda->plane_x * pY);
-    sprite_screen_x = (int)floor((double)(cub->gi.resolution[0] / 2) * (1.0 + pX / pY));
-    sprite_size = (int)floor(fabs((double)cub->gi.resolution[1] / pY));
+    
+    sprite_screen_x = (int)floor(((double)cub->gi.resolution[0] / 2.0) * (1.0 + pX / pY));
+    
+    sprite_size = (int)floor(fabs((double)cub->gi.resolution[1] / pY * 0.7));
 
-    Ystart = (cub->gi.resolution[1] / 2 - sprite_size / 2);
-	Yend = (cub->gi.resolution[1] / 2 + sprite_size / 2);
-	
-    Xstart = ~~(-sprite_size / 2 + sprite_screen_x);
-    Xend = sprite_size / 2 + sprite_screen_x;
+    Ystart = (int)((double)cub->gi.resolution[1] / 2.0 - (double)sprite_size / 2.0);
+	Yend = (int)((double)cub->gi.resolution[1] / 2.0 + (double)sprite_size / 2.0);
+
+    Xstart = (int)((double)-sprite_size / 2.0 + (double)sprite_screen_x);
+    Xend = (int)((double)sprite_size / 2.0 + (double)sprite_screen_x);
 	Xend = (Xend > cub->gi.resolution[0]) ? cub->gi.resolution[0] : Xend ;
 
-    ratio = cub->gi.resolution[0] / (double)sprite_size;
+    ratio = (double)cub->gi.texture.size[4] / (double)sprite_size;
     for (int i = Xstart; i < Xend; i++)
     {
         if (dda->wall_dist[i] >= pY && pY >= 0)
         {
-            for (int j = (Ystart > 0) ? Ystart : 0; j < cub->gi.resolution[1]; j++)
+            for (int j = (Ystart > 0) ? Ystart : 0; j < cub->gi.resolution[1] && j < Yend; j++)
             {
-                tmp = (double)(j - Ystart) * ratio;
-                indexa = i + j * cub->gi.resolution[0];
-                indexb = (int)floor((double)(i - Xstart) * ratio + tmp * (double)cub->gi.resolution[0]);
-                cub->mlx.screen[indexa] = cub->gi.texture.data[4][indexb];
+                tmp = floor((double)(j - Ystart) * ratio);
+                indexa = (i + j * cub->gi.resolution[0]);
+                indexb = (int)((double)(i - Xstart) * ratio + tmp * cub->gi.texture.size[4]);
+                if (cub->gi.texture.data[4][indexb])
+                    cub->mlx.screen[indexa] = cub->gi.texture.data[4][indexb];
             }
         }
     } 
