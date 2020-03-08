@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 04:32:57 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/06 05:15:56 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/08 19:29:14 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void    render_sprite(t_cub *cub, t_dda *dda)
                 tmp = floor((double)(j - Ystart) * ratio);
                 indexa = (i + j * cub->gi.resolution[0]);
                 indexb = (int)((double)(i - Xstart) * ratio + tmp * cub->gi.texture.size[4]);
-                if (cub->gi.texture.data[4][indexb])
+                if ((cub->gi.texture.data[4][indexb] & 0x00FFFFFF) != 0)
                     cub->mlx.screen[indexa] = cub->gi.texture.data[4][indexb];
             }
         }
