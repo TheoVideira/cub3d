@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 04:32:57 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/08 19:29:14 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:02:05 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void    render_sprite(t_cub *cub, t_dda *dda)
     int     Ystart, Yend, Xstart, Xend;
     int     indexa, indexb;
 
-    x = 11.0;
+    x = 10.5;
     y = 9.5;
 
     pX = x - cub->gi.player.pos_x;

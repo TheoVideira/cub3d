@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 09:59:12 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/06 02:50:01 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/09 14:58:49 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ void	movement_forward_backward(t_cub *cub)
 	if (cub->input.key_forward)
 	{
 		x = (int)(p->pos_x + p->dir_x * MOVE_SPEED * 4.0);
-		if (cub->gi.map[(int)p->pos_y][x] != '1')
+		if (can_move(cub->gi.map[(int)p->pos_y][x]))
 			p->pos_x += p->dir_x * MOVE_SPEED;
 		y = (int)(p->pos_y + p->dir_y * MOVE_SPEED * 4.0);
-		if (cub->gi.map[y][(int)floor(p->pos_x)] != '1')
+		if (can_move(cub->gi.map[y][(int)floor(p->pos_x)]))
 			p->pos_y += p->dir_y * MOVE_SPEED;
 	}
 	y = (int)(p->pos_y - p->dir_y * MOVE_SPEED * 4.0);
 	x = (int)(p->pos_x - p->dir_x * MOVE_SPEED * 4.0);
-	if (cub->input.key_backward && cub->gi.map[y][x] != '1')
+	if (cub->input.key_backward && can_move(cub->gi.map[y][x]))
 	{
 		p->pos_x -= p->dir_x * MOVE_SPEED;
 		p->pos_y -= p->dir_y * MOVE_SPEED;
@@ -84,14 +84,14 @@ void	movement_left_right_rotate(t_cub *cub)
 	p = &(cub->gi.player);
 	y = (int)(p->pos_y + p->dir_x * MOVE_SPEED * 4.0);
 	x = (int)(p->pos_x - p->dir_y * MOVE_SPEED * 4.0);
-	if (cub->input.key_left && cub->gi.map[y][x] != '1')
+	if (cub->input.key_left && can_move(cub->gi.map[y][x]))
 	{
 		p->pos_x -= p->dir_y * MOVE_SPEED;
 		p->pos_y += p->dir_x * MOVE_SPEED;
 	}
 	y = (int)(p->pos_y - p->dir_x * MOVE_SPEED * 4.0);
 	x = (int)(p->pos_x + p->dir_y * MOVE_SPEED * 4.0);
-	if (cub->input.key_right && cub->gi.map[y][x] != '1')
+	if (cub->input.key_right && can_move(cub->gi.map[y][x]))
 	{
 		p->pos_x += p->dir_y * MOVE_SPEED;
 		p->pos_y -= p->dir_x * MOVE_SPEED;

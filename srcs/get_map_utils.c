@@ -6,7 +6,7 @@
 /*   By: tvideira <tvideira@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:36:13 by tvideira          #+#    #+#             */
-/*   Updated: 2020/03/03 23:03:01 by tvideira         ###   ########.fr       */
+/*   Updated: 2020/03/09 14:56:51 by tvideira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ int		is_valid_case(char c)
 int		is_pos_case(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+
+int		can_move(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == '0');
 }
 
 void	init_player_values(char c, t_game_info *gi, int x, int y)
